@@ -8,4 +8,3 @@ Sau đó chạy ulimit -n 999999
 
 Và cuối cùng là bash run.sh HOST PORT THREAD (Nếu trên Cloud Shell thì tầm 5000 là ok) PATH
 
-END
