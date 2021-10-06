@@ -1,6 +1,6 @@
 # Cách dùng
 
-Tải và cài đặt Golang, sau đó cài thư viện github.com/txthinking/socks5 XD
+Tải và cài đặt Golang, sau đó cài thư viện github.com/txthinking/socks5
 
 Sau đó build file và chuẩn bị một list SOCKS5 bỏ vào 1 file tên là socks5.txt
 
