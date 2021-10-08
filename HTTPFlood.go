@@ -156,6 +156,7 @@ func StartFlood() {
 }
 
 func main() {
+	proxies = readLines("socks5.txt")
 	userAgents = getUserAgents(100)
 	threadNumber, _ := strconv.Atoi(threadNumber)
 	for i := 0; i < threadNumber; i++ {
