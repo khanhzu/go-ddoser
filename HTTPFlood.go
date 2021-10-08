@@ -3,11 +3,8 @@ package main
 import (
 	"bufio"
 	"crypto/tls"
-	"fmt"
-	"io/ioutil"
 	"math/rand"
 	"net"
-	"net/http"
 	"os"
 	"strconv"
 	"time"
@@ -36,35 +33,6 @@ func readLines(fileName string) []string {
 		lines = append(lines, scanner.Text())
 	}
 	return lines
-}
-
-func socksCrawler() {
-	socksResources := []string{
-		"https://api.proxyscrape.com/?request=displayproxies&proxytype=socks5&timeout=10000&country=all",
-		"https://www.proxy-list.download/api/v1/get?type=socks5",
-		"https://www.proxyscan.io/download?type=socks5",
-	}
-	var content []byte
-	for _, socksResource := range socksResources {
-		response, err := http.Get(socksResource)
-		if err != nil {
-			continue
-		}
-		defer response.Body.Close()
-		socksContent, _ := ioutil.ReadAll(response.Body)
-		content = append(content, socksContent...)
-		content = append(content, []byte("\n")...)
-	}
-	ioutil.WriteFile("socks5.txt", content, 0777)
-}
-
-func isInArgs(flag string) bool {
-	for _, args := range os.Args {
-		if flag == args {
-			return true
-		}
-	}
-	return false
 }
 
 func randomChars() string {
@@ -188,15 +156,6 @@ func StartFlood() {
 }
 
 func main() {
-	fmt.Println("Let's play...")
-	if isInArgs("socksCrawler") == true {
-		os.OpenFile("socks5.txt", os.O_RDONLY|os.O_CREATE, 0777)
-		socksCrawler()
-		proxies = readLines("socks5.txt")
-	} else {
-		os.OpenFile("socks5.txt", os.O_RDONLY|os.O_CREATE, 0777)
-		proxies = readLines("socks5.txt")
-	}
 	userAgents = getUserAgents(100)
 	threadNumber, _ := strconv.Atoi(threadNumber)
 	for i := 0; i < threadNumber; i++ {
