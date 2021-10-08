@@ -6,5 +6,5 @@ Sau đó build file bằng cách chạy go build HTTPFlood.go và chuẩn bị m
 
 Sau đó chạy ulimit -n 999999
 
-Và cuối cùng là bash run.sh HOST PORT THREAD (Nếu trên Cloud Shell thì tầm 5000 là ok) PATH
+Và cuối cùng là ./HTTPFlood HOST PORT THREAD (Nếu trên Cloud Shell thì tầm 5000 là ok) PATH
 
