@@ -189,11 +189,15 @@ func StartFlood() {
 
 func main() {
 	fmt.Println("Let's play...")
-	proxies = readLines("socks5.txt")
-	userAgents = getUserAgents(100)
 	if isInArgs("socksCrawler") == true {
+		os.OpenFile("socks5.txt", os.O_RDONLY|os.O_CREATE, 0777)
 		socksCrawler()
+		proxies = readLines("socks5.txt")
+	} else {
+		os.OpenFile("socks5.txt", os.O_RDONLY|os.O_CREATE, 0777)
+		proxies = readLines("socks5.txt")
 	}
+	userAgents = getUserAgents(100)
 	threadNumber, _ := strconv.Atoi(threadNumber)
 	for i := 0; i < threadNumber; i++ {
 		go StartFlood()
