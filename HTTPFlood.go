@@ -27,7 +27,7 @@ func init() {
 
 func readLines(fileName string) []string {
 	var lines []string
-	openFile, _ := os.Open("socks5.txt")
+	openFile, _ := os.Open(fileName)
 	scanner := bufio.NewScanner(openFile)
 	for scanner.Scan() {
 		lines = append(lines, scanner.Text())
