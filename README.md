@@ -8,5 +8,6 @@ Sau đó chạy ulimit -n 999999
 
 chmod 777 *
 
-Và cuối cùng là bash run.sh HOST PORT THREAD (Nếu trên Cloud Shell thì tầm 5000 là ok) PATH
+Và cuối cùng là ./HTTPFlood HOST PORT THREAD (Nếu trên Cloud Shell thì tầm 5000 là ok) PATH SOCKS_VERSION (socks4/socks5)
+VD: 
 
